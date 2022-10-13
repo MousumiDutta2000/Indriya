@@ -54,3 +54,30 @@ async function main() {
     const contract = network.getContract('INDRIYA');
     return contract;
 }
+app.post('/createpatient', async (req, res) => {
+    try {
+        await createPatient(JSON.stringify(req.body));
+        res.sendStatus(201);
+    } catch (error) {
+        res.sendStatus(400);
+    }
+})
+app.get('/allpatient', async (req, res) => {
+    try {
+        res.json(JSON.parse(await queryAllPatients()));
+      //  res.sendStatus(200)
+    } catch (error) {
+        res.sendStatus(404);
+    }
+})
+
+async function createPatient(args){
+    console.log(args)
+    await contract.submitTransaction('PrimaryContract:createPatient', args)
+    console.log('PrimaryContract:createPatient-Transaction has been submitted');
+}
+async function queryAllPatients(){
+    const result = await contract.evaluateTransaction('PrimaryContract:queryAllPatients');
+    console.log(`PrimaryContract:queryAllPatients-Transaction has been evaluated, result is: ${result.toString()}`);
+    return result;
+}
