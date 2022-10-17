@@ -101,6 +101,21 @@ async getAllPatientResults(iterator, isHistory) {
         }
     }
 }
+    async match(ctx,args){
+        let organRequired=args.organRequired
+        let bloodgroup=args.bloodgroup
+        let gender=args.gender
+        let allPatients=await this.queryAllPatients(ctx)
+        let matches=[]
+
+        for(let i=0;i<allPatients.length;i++){
+            let p=allPatients[i]
+            if(p.Record.bloodgroup==bloodgroup && p.Record.organRequired==organRequired && p.Record.gender==gender){
+                matches.push(p.Record.PID)
+            }
+        }
+        return matches
+    }
 
 }
 module.exports = PrimaryContract;

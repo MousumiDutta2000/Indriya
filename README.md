@@ -61,6 +61,32 @@ docker start $(docker ps -a -q)
 If you clean the network , then again you need to delete the <code>admin.id</code> and <code>appUser.id</code> from the <code>/client/javascript/wallet/</code> and again generate them using <code>enrollAdmin.js</code>
 and <code>registerUser.js</code>
 
+## Troubleshooting
+<hr>
+<li>Got permission denied issue in Docker:</li>
+
+<b>Solution:</b>
+
+<a href="https://stackoverflow.com/a/48957722">https://stackoverflow.com/a/48957722</a>
+
+<li>API error (404): network _test not found</li>
+
+```
+error: [Transaction]: Error: No valid responses from any peers. Errors:
+    peer=peer0.org1.example.com:7051, status=500, message=error in simulation: failed to execute transaction 
+aa705c10403cb65cecbd360c13337d03aac97a8f233a466975773586fe1086f6: could not launch chaincode basic_1.0:b359a077730d7
+f44d6a437ad49d1da951f6a01c6d1eed4f85b8b1f5a08617fe7: error starting container: error starting container:
+ API error (404): network _test not found
+```
+<b>Solution:</b>
+Run the following command in the terminal
+```
+COMPOSE_PROJECT_NAME=docker
+```
+
+
 <hr>
 This documentation is written by <i>Satyajit Ghosh</i> (satyajit.ghosh@stu.adamasuniversity.ac.in)
 <hr>
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
