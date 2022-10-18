@@ -44,9 +44,9 @@ async createPatient(ctx, args) {
         args.age,
         args.phoneNumber,
         args.address,
+        args.organRequired,
         args.bloodgroup,
-        args.gender,
-        args.organRequired
+        args.gender
     );
     const exists = await this.patientExists(ctx, newpatient.PID);
     if (exists) {
@@ -102,16 +102,16 @@ async getAllPatientResults(iterator, isHistory) {
     }
 }
     async match(ctx,args){
+        args=JSON.parse(args)
         let organRequired=args.organRequired
         let bloodgroup=args.bloodgroup
         let gender=args.gender
         let allPatients=await this.queryAllPatients(ctx)
         let matches=[]
-
         for(let i=0;i<allPatients.length;i++){
             let p=allPatients[i]
             if(p.Record.bloodgroup==bloodgroup && p.Record.organRequired==organRequired && p.Record.gender==gender){
-                matches.push(p.Record.PID)
+                matches.push(p)
             }
         }
         return matches
