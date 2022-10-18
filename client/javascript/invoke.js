@@ -70,7 +70,18 @@ app.get('/allpatient', async (req, res) => {
         res.sendStatus(404);
     }
 })
-
+app.get('/findmatch',async (req,res)=>{
+    try{
+        res.json(JSON.parse(await match(req.body)))
+    }catch{
+        res.sendStatus(404)
+    }
+})
+async function match(args){
+    console.log(args)
+    const result = await contract.evaluateTransaction('PrimaryContract:match',JSON.stringify(args))
+    return result;
+}
 async function createPatient(args){
     console.log(args)
     await contract.submitTransaction('PrimaryContract:createPatient', args)
