@@ -22,29 +22,29 @@ It is used to fetch details of all the registered patients.
         "Record": {
             "PID": "1",
             "address": "Kolkata",
-            "age": "20",
-            "bloodgroup": "Male",
+            "age": "75",
+            "bloodgroup": "A",
             "docType": "patient",
-            "firstName": "Rajib",
-            "gender": "liver",
+            "firstName": "Raja",
+            "gender": "Male",
             "lastName": "Ghosh",
-            "organRequired": "A",
-            "phoneNumber": "12345"
+            "organRequired": "heart",
+            "phoneNumber": "23415234"
         }
     },
     {
         "Key": "2",
         "Record": {
             "PID": "2",
-            "address": "Kolkata",
+            "address": "Burdwan",
             "age": "60",
-            "bloodgroup": "Female",
+            "bloodgroup": "B",
             "docType": "patient",
             "firstName": "Rani",
-            "gender": "heart",
-            "lastName": "Pal",
-            "organRequired": "B",
-            "phoneNumber": "87393840"
+            "gender": "Female",
+            "lastName": "Das",
+            "organRequired": "liver",
+            "phoneNumber": "23523523"
         }
     }
 ]
@@ -71,3 +71,40 @@ x-www-form-urlencoded key
 <li>gender</li>
 <li>organRequired</li>
 </ul>
+
+<hr>
+GET
+<hr>
+<code>/findmatch</code>
+<hr>
+It is used to find matches . Output format is same as <code>/allpatient</code> in case of multiple matches are found.
+
+### Sample Input
+
+<ul>
+<li>bloodgroup</li>
+<li>gender</li>
+<li>organRequired</li>
+</ul>
+
+### Sample Output
+
+```
+[
+    {
+        "Key": "1",
+        "Record": {
+            "PID": "1",
+            "address": "Kolkata",
+            "age": "75",
+            "bloodgroup": "A",
+            "docType": "patient",
+            "firstName": "Raja",
+            "gender": "Male",
+            "lastName": "Ghosh",
+            "organRequired": "heart",
+            "phoneNumber": "23415234"
+        }
+    }
+]
+```
