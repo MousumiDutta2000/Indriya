@@ -62,9 +62,9 @@ app.post('/createpatient', async (req, res) => {
         res.sendStatus(400);
     }
 })
-app.get('/allpatient', async (req, res) => {
+app.get('/allpatient/:type', async (req, res) => {
     try {
-        res.json(JSON.parse(await queryAllPatients()));
+        res.json(JSON.parse(await queryAll(req.params.type)));
       //  res.sendStatus(200)
     } catch (error) {
         res.sendStatus(404);
@@ -77,6 +77,33 @@ app.get('/findmatch',async (req,res)=>{
         res.sendStatus(404)
     }
 })
+app.get('/patient/:PID',async (req,res)=>{
+    try{
+        res.json(JSON.parse(await readPatient(req.params.PID)))
+    }catch{
+        res.sendStatus(404)
+    }
+})
+app.post('/delete/:PID',async (req,res)=>{
+    try {
+        await deletePatient(req.params.PID);
+        res.sendStatus(201);
+    } catch (error) {
+        res.sendStatus(400);
+    }
+})
+app.post('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
+    try {
+        let args={"Donor_PID":req.params.donorpid,
+        "Receiver_PID":req.params.receiverpid};
+        console.log(args)
+        await selectMatch(args);
+        res.sendStatus(201);
+    } catch (error) {
+        res.sendStatus(400);
+    }
+})
+
 async function match(args){
     console.log(args)
     const result = await contract.evaluateTransaction('PrimaryContract:match',JSON.stringify(args))
@@ -87,8 +114,21 @@ async function createPatient(args){
     await contract.submitTransaction('PrimaryContract:createPatient', args)
     console.log('PrimaryContract:createPatient-Transaction has been submitted');
 }
-async function queryAllPatients(){
-    const result = await contract.evaluateTransaction('PrimaryContract:queryAllPatients');
-    console.log(`PrimaryContract:queryAllPatients-Transaction has been evaluated, result is: ${result.toString()}`);
+async function queryAll(docType){
+    const result = await contract.evaluateTransaction('PrimaryContract:queryAll',docType);
+    console.log(`PrimaryContract:queryAll-Transaction has been evaluated, result is: ${result.toString()}`);
     return result;
+}
+async function deletePatient(PID){
+    await contract.submitTransaction('PrimaryContract:deletePatient',PID);
+    console.log('PrimaryContract:deletePatient-Transaction has been submitted');
+}
+async function readPatient(PID){
+    const result = await contract.evaluateTransaction('PrimaryContract:readPatient',PID);
+    console.log(`PrimaryContract:queryAll-Transaction has been evaluated, result is: ${result.toString()}`);
+    return result;
+}
+async function selectMatch(args){
+    await contract.submitTransaction('PrimaryContract:selectMatch',JSON.stringify(args));
+    console.log('PrimaryContract:selectMatch-Transaction has been submitted');
 }
