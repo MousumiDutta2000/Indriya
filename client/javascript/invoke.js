@@ -84,7 +84,10 @@ app.post('/auth', function(request, response) {
         response.end();
     }
 });
-
+app.get('/logout',function(req,res){
+    req.session.loggedin=false;
+    res.redirect('/');
+})
 app.get('/admin', function(request, response) {
 	// If the user is loggedin
 	if (request.session.loggedin && request.session.username=='admin') {
