@@ -118,7 +118,7 @@ async getAllResults(iterator, isHistory) {
         let matches=[]
         for(let i=0;i<allPatients.length;i++){
             let p=allPatients[i]
-            if(p.Record.docType=='patient' && p.Record.bloodgroup==bloodgroup && p.Record.organRequired==organRequired && p.Record.gender==gender){
+            if(p.Record.docType=='donor' && p.Record.bloodgroup==bloodgroup && p.Record.organRequired==organRequired && p.Record.gender==gender){
                 matches.push(p)
             }
         }
