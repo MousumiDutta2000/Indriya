@@ -15,7 +15,13 @@ app.set('view engine', 'ejs');
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'static')));
+const session = require('express-session');
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 //============================================================
 app.listen(3000, async () => {
     console.log("Started on PORT 3000");
@@ -54,6 +60,40 @@ async function main() {
     const contract = network.getContract('INDRIYA');
     return contract;
 }
+
+app.get('/',(req,res)=>{
+    res.render('login')
+})
+
+app.post('/auth', function(request, response) {
+	// Capture the input fields
+	let username = request.body.username;
+	let password = request.body.password;
+    if(username=='admin' && password=='1234'){
+        request.session.loggedin = true;
+        request.session.username = username;
+        response.redirect('/admin');
+
+    }else{
+        response.send('Incorrect Username and/or Password!');
+        response.end();
+    }
+});
+
+app.get('/admin', function(request, response) {
+	// If the user is loggedin
+	if (request.session.loggedin) {
+		// Output username
+		//response.send('Welcome back, ' + request.session.username + '!');
+
+        response.render('admin')
+	} else {
+		// Not logged in
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+
 app.post('/createpatient', async (req, res) => {
     try {
         await createPatient(JSON.stringify(req.body));
@@ -62,9 +102,14 @@ app.post('/createpatient', async (req, res) => {
         res.sendStatus(400);
     }
 })
-app.get('/allpatient/:type', async (req, res) => {
+app.get('/admin/:type', async (req, res) => {
     try {
-        res.json(JSON.parse(await queryAll(req.params.type)));
+       let info=JSON.parse(await queryAll(req.params.type));
+       if(req.params.type=='donor'){
+           res.render('donorlist',{"data":info})
+       }else if(req.params.type=='patient'){
+        res.render('patientlist',{"data":info})
+       }
       //  res.sendStatus(200)
     } catch (error) {
         res.sendStatus(404);
@@ -84,10 +129,10 @@ app.get('/patient/:PID',async (req,res)=>{
         res.sendStatus(404)
     }
 })
-app.post('/delete/:PID',async (req,res)=>{
+app.get('/delete/:PID',async (req,res)=>{
     try {
         await deletePatient(req.params.PID);
-        res.sendStatus(201);
+        res.send("Sucessfully Deleted")
     } catch (error) {
         res.sendStatus(400);
     }
