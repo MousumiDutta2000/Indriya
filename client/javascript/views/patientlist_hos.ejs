@@ -19,7 +19,7 @@
             <th scope="col">Organ Type</th>
             <th scope="col">Blood Group</th>
             <th scope="col">Gender</th>
-            <th scope="col">Find Match</th>
+            <th scope="col">Match</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -31,8 +31,12 @@
              <td><%= data[i].Record.organRequired %></td>
              <td><%= data[i].Record.bloodgroup %></td>
              <td><%= data[i].Record.gender %></td>
+            <% if(data[i].Record.match != ''){ %>
+                <td><%= data[i].Record.match %></td>
+            <% }else{ %>
              <td><a href=<%="/findmatch/"+data[i].Record.organRequired+"/"+ data[i].Record.bloodgroup + "/" + data[i].Record.gender + "/"+ data[i].Record.PID %>>Find Match</a></td>
-           </tr>
+            <% } %>
+            </tr>
         <% } %>
     </tbody>
     </table>

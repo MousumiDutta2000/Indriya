@@ -142,9 +142,9 @@ app.post('/createpatient', async (req, res) => {
     try {
         console.log(req.body)
         await createPatient(JSON.stringify(req.body));
-        res.send(req.body.docType+" added sucessfully");
+        res.render('patient_donor_added',{"type":req.body.docType})
     } catch (error) {
-        res.sendStatus(400);
+        res.render('createuser_error')
     }
 })
 app.get('/admin/:type', async (req, res) => {
