@@ -74,7 +74,12 @@ app.post('/auth', function(request, response) {
         request.session.username = username;
         response.redirect('/admin');
 
-    }else{
+    }else if(username=='hos1' && password=='1234'){
+        request.session.loggedin = true;
+        request.session.username = username;
+        response.redirect('/hos');
+    }
+    else{
         response.send('Incorrect Username and/or Password!');
         response.end();
     }
@@ -82,7 +87,7 @@ app.post('/auth', function(request, response) {
 
 app.get('/admin', function(request, response) {
 	// If the user is loggedin
-	if (request.session.loggedin) {
+	if (request.session.loggedin && request.session.username=='admin') {
 		// Output username
 		//response.send('Welcome back, ' + request.session.username + '!');
 
@@ -94,10 +99,50 @@ app.get('/admin', function(request, response) {
 	response.end();
 });
 
+app.get('/hos', function(request, response) {
+	// If the user is loggedin
+	if (request.session.loggedin && request.session.username=='hos1') {
+		// Output username
+		//response.send('Welcome back, ' + request.session.username + '!');
+
+        response.render('hospital')
+	} else {
+		// Not logged in
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+app.get('/hos/registerpatient',function (request,response){
+    	// If the user is loggedin
+	if (request.session.loggedin && request.session.username=='hos1') {
+		// Output username
+		//response.send('Welcome back, ' + request.session.username + '!');
+
+        response.render('addpatient')
+	} else {
+		// Not logged in
+		response.send('Please login to view this page!');
+	}
+	response.end();
+})
+app.get('/hos/match',async function (request,response){
+        	// If the user is loggedin
+	if (request.session.loggedin && request.session.username=='hos1') {
+		// Output username
+		//response.send('Welcome back, ' + request.session.username + '!');
+        let info=JSON.parse(await queryAll('patient'));
+        response.render('patientlist_hos',{"data":info})
+        }else {
+		// Not logged in
+		response.send('Please login to view this page!');
+	}
+	response.end();
+})
 app.post('/createpatient', async (req, res) => {
     try {
+        console.log(req.body)
         await createPatient(JSON.stringify(req.body));
-        res.sendStatus(201);
+        res.send(req.body.docType+" added sucessfully");
     } catch (error) {
         res.sendStatus(400);
     }
@@ -115,9 +160,12 @@ app.get('/admin/:type', async (req, res) => {
         res.sendStatus(404);
     }
 })
-app.get('/findmatch',async (req,res)=>{
+app.get('/findmatch/:organRequired/:bloodgroup/:gender/:PID',async (req,res)=>{
     try{
-        res.json(JSON.parse(await match(req.body)))
+        let info={"organRequired":req.params.organRequired,"bloodgroup":req.params.bloodgroup,"gender":req.params.gender}
+        let data=JSON.parse(await match(info));
+        data.Patient_ID=req.params.PID;
+        res.render('matched_donor_list',{"data":data})
     }catch{
         res.sendStatus(404)
     }
@@ -137,13 +185,13 @@ app.get('/delete/:PID',async (req,res)=>{
         res.sendStatus(400);
     }
 })
-app.post('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
+app.get('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
     try {
         let args={"Donor_PID":req.params.donorpid,
         "Receiver_PID":req.params.receiverpid};
         console.log(args)
         await selectMatch(args);
-        res.sendStatus(201);
+        res.send("Donor is matched with Patient")
     } catch (error) {
         res.sendStatus(400);
     }
