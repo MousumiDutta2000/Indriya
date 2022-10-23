@@ -191,7 +191,7 @@ app.get('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
         "Receiver_PID":req.params.receiverpid};
         console.log(args)
         await selectMatch(args);
-        res.send("Donor is matched with Patient")
+        res.render("matched_congo_page")
     } catch (error) {
         res.sendStatus(400);
     }
