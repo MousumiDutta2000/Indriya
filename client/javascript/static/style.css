@@ -4,7 +4,9 @@
     font-size: 16px;
 }
 body {
-    background-color: #435165;
+    height: 100vh;
+    background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);
+    background-size: 100%;
 }
 .login {
     width: 400px;
