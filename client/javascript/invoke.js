@@ -177,10 +177,20 @@ app.get('/patient/:PID',async (req,res)=>{
         res.sendStatus(404)
     }
 })
-app.get('/delete/:PID',async (req,res)=>{
+app.get('/patient/delete/:PID',async (req,res)=>{
     try {
         await deletePatient(req.params.PID);
-        res.send("Sucessfully Deleted")
+        res.redirect('/admin/patient')
+
+    } catch (error) {
+        res.sendStatus(400);
+    }
+})
+app.get('/donor/delete/:PID',async (req,res)=>{
+    try {
+        await deletePatient(req.params.PID);
+        res.redirect('/admin/donor')
+
     } catch (error) {
         res.sendStatus(400);
     }
