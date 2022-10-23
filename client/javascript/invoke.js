@@ -61,10 +61,11 @@ async function main() {
     return contract;
 }
 
+// login page
 app.get('/',(req,res)=>{
     res.render('login')
 })
-
+// for authorization of hospital and admin using express-sessions
 app.post('/auth', function(request, response) {
 	// Capture the input fields
 	let username = request.body.username;
@@ -84,16 +85,15 @@ app.post('/auth', function(request, response) {
         response.end();
     }
 });
+//to log out
 app.get('/logout',function(req,res){
     req.session.loggedin=false;
     res.redirect('/');
 })
+// admin dashboard
 app.get('/admin', function(request, response) {
 	// If the user is loggedin
 	if (request.session.loggedin && request.session.username=='admin') {
-		// Output username
-		//response.send('Welcome back, ' + request.session.username + '!');
-
         response.render('admin')
 	} else {
 		// Not logged in
@@ -101,13 +101,10 @@ app.get('/admin', function(request, response) {
 	}
 	response.end();
 });
-
+// hospital dashboard
 app.get('/hos', function(request, response) {
 	// If the user is loggedin
 	if (request.session.loggedin && request.session.username=='hos1') {
-		// Output username
-		//response.send('Welcome back, ' + request.session.username + '!');
-
         response.render('hospital')
 	} else {
 		// Not logged in
@@ -115,12 +112,10 @@ app.get('/hos', function(request, response) {
 	}
 	response.end();
 });
+// register a new patient or donor
 app.get('/hos/registerpatient',function (request,response){
     	// If the user is loggedin
 	if (request.session.loggedin && request.session.username=='hos1') {
-		// Output username
-		//response.send('Welcome back, ' + request.session.username + '!');
-
         response.render('addpatient')
 	} else {
 		// Not logged in
@@ -128,11 +123,10 @@ app.get('/hos/registerpatient',function (request,response){
 	}
 	response.end();
 })
+// renders match-making between donor and patient page
 app.get('/hos/match',async function (request,response){
         	// If the user is loggedin
 	if (request.session.loggedin && request.session.username=='hos1') {
-		// Output username
-		//response.send('Welcome back, ' + request.session.username + '!');
         let info=JSON.parse(await queryAll('patient'));
         response.render('patientlist_hos',{"data":info})
         }else {
@@ -141,6 +135,7 @@ app.get('/hos/match',async function (request,response){
 	}
 	response.end();
 })
+// POST method to create a new patient or donor , then it renders sucess or failure page
 app.post('/createpatient', async (req, res) => {
     try {
         console.log(req.body)
@@ -150,6 +145,7 @@ app.post('/createpatient', async (req, res) => {
         res.render('createuser_error')
     }
 })
+// to get the list of patients or donors by admin
 app.get('/admin/:type', async (req, res) => {
     try {
        let info=JSON.parse(await queryAll(req.params.type));
@@ -163,6 +159,7 @@ app.get('/admin/:type', async (req, res) => {
         res.sendStatus(404);
     }
 })
+// renders the matched donor list
 app.get('/findmatch/:organRequired/:bloodgroup/:gender/:PID',async (req,res)=>{
     try{
         let info={"organRequired":req.params.organRequired,"bloodgroup":req.params.bloodgroup,"gender":req.params.gender}
@@ -173,6 +170,7 @@ app.get('/findmatch/:organRequired/:bloodgroup/:gender/:PID',async (req,res)=>{
         res.sendStatus(404)
     }
 })
+// used to get a single patient details
 app.get('/patient/:PID',async (req,res)=>{
     try{
         res.json(JSON.parse(await readPatient(req.params.PID)))
@@ -180,6 +178,7 @@ app.get('/patient/:PID',async (req,res)=>{
         res.sendStatus(404)
     }
 })
+// used to delete a patient
 app.get('/patient/delete/:PID',async (req,res)=>{
     try {
         await deletePatient(req.params.PID);
@@ -189,6 +188,7 @@ app.get('/patient/delete/:PID',async (req,res)=>{
         res.sendStatus(400);
     }
 })
+// used to delete a donor
 app.get('/donor/delete/:PID',async (req,res)=>{
     try {
         await deletePatient(req.params.PID);
@@ -198,6 +198,7 @@ app.get('/donor/delete/:PID',async (req,res)=>{
         res.sendStatus(400);
     }
 })
+// used to cross-update donor , patient information
 app.get('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
     try {
         let args={"Donor_PID":req.params.donorpid,
@@ -209,7 +210,7 @@ app.get('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
         res.sendStatus(400);
     }
 })
-
+// ================================================
 async function match(args){
     console.log(args)
     const result = await contract.evaluateTransaction('PrimaryContract:match',JSON.stringify(args))

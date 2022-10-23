@@ -1,5 +1,21 @@
 # Indriya
 
+Indriya: Organ Donation and Transplantation System using Blockchain
+
+Demo Video : Will be updated soon
+
+Indriya is a distributed online system that automates the organ donation and transplantation process and
+increases speed, transparency, and security. It provides various interfaces for different stakeholders like
+doctors, donors and recipient. It aims to automate the match-making process between donor and recipient.
+This distributed blockchain-based organ donation and transplantation system stores the details of the patient
+or organ receiver and the details of the organ donor. The patient details include name, age, gender, address,
+contact information, blood group, organ required, and previous medical history. The same information is
+also taken from the organ donor. This information is uploaded by the respective hospitals or authorized
+doctors. The match-making process checks if the organ required type matches the donating organ. Next, it
+also checks if the blood group and gender of the receiver are matching with the donor. If everything matches,
+then the system informs the patient about the match. 
+
+
 ### Install all the requirements :
 1. Node v10.19.0
 2. NPM v10.19.0
