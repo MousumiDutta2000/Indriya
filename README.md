@@ -2,7 +2,7 @@
 
 Indriya: Organ Donation and Transplantation System using Blockchain
 
-Demo Video : Will be updated soon
+Demo Video : https://youtu.be/0kyaSlfcbNA
 
 Indriya is a distributed online system that automates the organ donation and transplantation process and
 increases speed, transparency, and security. It provides various interfaces for different stakeholders like
