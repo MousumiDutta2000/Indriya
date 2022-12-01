@@ -15,22 +15,32 @@ doctors. The match-making process checks if the organ required type matches the 
 also checks if the blood group and gender of the receiver are matching with the donor. If everything matches,
 then the system informs the patient about the match. 
 
-
-### Install all the requirements :
+### Requirements :
 1. Node v10.19.0
-2. NPM v10.19.0
+2. NPM v6.14.4
 3. Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1
 4. Git 2.25.1
 5. cURL 7.68.0
 
 ( https://hyperledger-fabric.readthedocs.io/ml/latest/prereqs.html )
 
+<b>Install Command</b>
+```
+sudo apt-get update
+sudo apt-get install nodejs npm git curl docker docker-compose
+```
 <hr>
 
+### Install Samples, Binaries, and Docker Images
+
+```
+curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.2 1.4.9
+```
+(https://hyperledger-fabric.readthedocs.io/ml/latest/install.html)
 
 ### Clone this repository
 ```
-git clone git@github.com:MousumiDutta2000/Indriya.git
+git clone git@github.com:SATYAJIT1910/PTJSP.git
 ```
 
 ### Next run the script (go to test-network folder and then)
@@ -49,10 +59,19 @@ Next run the following commands to register admin and user in blockchain
 node enrollAdmin.js
 node registerUser.js
 ```
-
-To start the server use 
+Make a .env file inside <code>client/javascript/</code> . It should look like below sample -
 ```
-node invoke.js
+# .env file
+ADMIN_ID='your_admin_password'
+ADMIN_KEY='your_admin_password'
+HOS_ID='your_hos_id'
+HOS_KEY='your_hos_password'
+
+```
+
+To start the server use -
+```
+npm start
 ```
 ## Important Points
 
@@ -85,6 +104,26 @@ and <code>registerUser.js</code>
 
 <a href="https://stackoverflow.com/a/48957722">https://stackoverflow.com/a/48957722</a>
 
+<li>Problem installing Node 10.19 ?</li>
+
+<b>Solution:</b>
+
+Install nvm
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+```
+then install the node 10.19
+
+```
+nvm install 10.19
+```
+after that use that version using -
+
+```
+nvm use 10.19
+```
+
+If you don't use this node version, then your <code>npm install</code> will be stucked.
 <li>API error (404): network _test not found</li>
 
 ```
@@ -99,10 +138,31 @@ Run the following command in the terminal
 ```
 COMPOSE_PROJECT_NAME=docker
 ```
+<hr>
+
+## Team Members
+<hr>
+<table>
+    <tr>
+        <td align="center">
+            <a href="https://www.linkedin.com/in/satyajit1910/">
+                <img src="https://i.postimg.cc/pd2f31Pd/satya.jpg" width="120px;" alt=""/><p><b>Satyajit Ghosh </b></p><br />
+                <!-- <sub><b>brookmg</b></sub> -->
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://www.linkedin.com/in/mousumi-dutta-b4199a217/">
+                <img src="https://media-exp1.licdn.com/dms/image/C4D03AQG7Vtmr-Q7DtQ/profile-displayphoto-shrink_800_800/0/1626774583190?e=1675296000&v=beta&t=61uwE7nT9M6U3FYL8g2v6q43Sffv3lI_8pIdNU0LHy0" width="120px;" alt=""/>
+                <p><b>Mousumi Dutta</b></p><br />
+            </a>
+        </td>
+</table>
+
+
 
 
 <hr>
-This documentation is written by <i>Satyajit Ghosh</i> (satyajit.ghosh@stu.adamasuniversity.ac.in)
+This documentation is written by <i>Satyajit Ghosh</i> (satyajit@satyajit.co.in & satyajit.ghosh@stu.adamasuniversity.ac.in)
 <hr>
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

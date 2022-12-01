@@ -8,6 +8,7 @@ let contract;
 const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config()
 const express = require("express");
 const app = express();
 // set the view engine to ejs
@@ -70,12 +71,12 @@ app.post('/auth', function(request, response) {
 	// Capture the input fields
 	let username = request.body.username;
 	let password = request.body.password;
-    if(username=='admin' && password=='1234'){
+    if(username==process.env.ADMIN_ID && password==process.env.ADMIN_KEY){
         request.session.loggedin = true;
         request.session.username = username;
         response.redirect('/admin');
 
-    }else if(username=='hos1' && password=='1234'){
+    }else if(username==process.env.HOS_ID && password==process.env.HOS_KEY){
         request.session.loggedin = true;
         request.session.username = username;
         response.redirect('/hos');
