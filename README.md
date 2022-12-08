@@ -27,9 +27,48 @@ then the system informs the patient about the match.
 <b>Install Command</b>
 ```
 sudo apt-get update
-sudo apt-get install nodejs npm git curl docker docker-compose
+sudo apt-get install git curl docker docker-compose
 ```
 <hr>
+
+### Add Permission for docker to run as as non-root user
+
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+### Install Node JS and NPM using NVM
+
+Install nvm
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+```
+then install the node 10.19
+
+```
+nvm install 10.19
+```
+after that use that version using -
+
+```
+nvm use 10.19
+```
+
+then create symbolic links to run nvm node with root
+
+```
+sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" "/usr/local/bin/node"
+sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" "/usr/local/bin/npm"
+```
+
+
+If you don't use this node version, then your <code>npm install</code> will be stucked.
+
+
+
+
 
 ### Install Samples, Binaries, and Docker Images
 
@@ -40,7 +79,7 @@ curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.2 1.4.9
 
 ### Clone this repository
 ```
-git clone git@github.com:SATYAJIT1910/PTJSP.git
+git clone git@github.com:MousumiDutta2000/Indriya.git
 ```
 
 ### Next run the script (go to test-network folder and then)
@@ -62,7 +101,7 @@ node registerUser.js
 Make a .env file inside <code>client/javascript/</code> . It should look like below sample -
 ```
 # .env file
-ADMIN_ID='your_admin_password'
+ADMIN_ID='your_admin_id'
 ADMIN_KEY='your_admin_password'
 HOS_ID='your_hos_id'
 HOS_KEY='your_hos_password'
@@ -96,47 +135,23 @@ docker start $(docker ps -a -q)
 If you clean the network , then again you need to delete the <code>admin.id</code> and <code>appUser.id</code> from the <code>/client/javascript/wallet/</code> and again generate them using <code>enrollAdmin.js</code>
 and <code>registerUser.js</code>
 
-## Troubleshooting
-<hr>
-<li>Got permission denied issue in Docker:</li>
 
-<b>Solution:</b>
+# Production Only
 
-<a href="https://stackoverflow.com/a/48957722">https://stackoverflow.com/a/48957722</a>
+## To generate SSL certificate for Server
 
-<li>Problem installing Node 10.19 ?</li>
-
-<b>Solution:</b>
-
-Install nvm
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-```
-then install the node 10.19
 
 ```
-nvm install 10.19
+sudo apt-get install certbot
+sudo certbot certonly --standalone
 ```
-after that use that version using -
+then use <code>invokeprod.js</code> instead of <code>invoke.js</code>
+<br><b>Note: </b>Change the domain name in the <code>invokeprod.js</code> as per your setup</b>
+
+Run as 
 
 ```
-nvm use 10.19
-```
-
-If you don't use this node version, then your <code>npm install</code> will be stucked.
-<li>API error (404): network _test not found</li>
-
-```
-error: [Transaction]: Error: No valid responses from any peers. Errors:
-    peer=peer0.org1.example.com:7051, status=500, message=error in simulation: failed to execute transaction 
-aa705c10403cb65cecbd360c13337d03aac97a8f233a466975773586fe1086f6: could not launch chaincode basic_1.0:b359a077730d7
-f44d6a437ad49d1da951f6a01c6d1eed4f85b8b1f5a08617fe7: error starting container: error starting container:
- API error (404): network _test not found
-```
-<b>Solution:</b>
-Run the following command in the terminal
-```
-COMPOSE_PROJECT_NAME=docker
+sudo node invokeprod.js
 ```
 <hr>
 
