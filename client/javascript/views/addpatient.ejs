@@ -107,7 +107,7 @@
     <div class="col-md-2">
       <label for="name" class="form-label">Age</label>
       <label for="caption" style="color: red;font-size: 10px;">*(must be 5-70 years)</label>
-      <input type="text" class="form-control" name="age" pattern="^[5-70]*$" required>
+      <input type="text" class="form-control" name="age" pattern=\b([1-9]|[1-9][0-9])\b required>
     </div>
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Gender</label>
