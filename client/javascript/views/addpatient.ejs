@@ -33,7 +33,7 @@
         </li>
         
         <li class="nav-item px-2">
-          <a class="nav-link" href="#"><h3>About</h3></a>
+          <a class="nav-link" href="/about"><h3>About</h3></a>
         </li>
       </form>
     </div>
@@ -54,17 +54,14 @@
     </div>
     <div class="col-md-2">
       <label for="name" class="form-label">ID</label>
-      <input type="text" class="form-control" name="PID" required>
+      <label for="caption" style="color: red;font-size: 10px;">*(should not contain any special charecters(!,-*))</label>
+      <input type="text" class="form-control" name="PID"  pattern="[A-Z a-z 0-9]*$" required>
     </div>
     </div>
     <div class="row">
     <div class="col-md-4">
       <label for="name" class="form-label">First Name</label>
       <input type="text" class="form-control" name="firstName" required>
-    </div>
-     <div class="col-md-3">
-      <label for="name" class="form-label">Middle Name</label>
-      <input type="text" class="form-control" name="middleName">
     </div>
     <div class="col-md-4">
       <label for="name" class="form-label">Last Name</label>
@@ -74,9 +71,10 @@
     <div class="row">
     <div class="col-md-2">
       <label for="name" class="form-label">Phone</label>
-      <input type="text" class="form-control" name="phoneNumber" max="10" required>
+      <label for="caption" style="color: red;font-size: 10px;">*(must be number(0-9))</label>
+      <input type="text" class="form-control" name="phoneNumber" pattern="^\d{10}$" required>
     </div>
-    <div class="col-9">
+    <div class="col-6">
       <label for="inputAddress2" class="form-label">Address</label>
       <input type="text" class="form-control" placeholder="Apartment, Street" name="address" required>
     </div>
@@ -108,7 +106,8 @@
     <div class="row">
     <div class="col-md-2">
       <label for="name" class="form-label">Age</label>
-      <input type="text" class="form-control" name="age" required>
+      <label for="caption" style="color: red;font-size: 10px;">*(must be 5-70 years)</label>
+      <input type="text" class="form-control" name="age" pattern="^[5-70]*$" required>
     </div>
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Gender</label>
@@ -173,4 +172,5 @@
   </div>
 
 </footer>
+
 </html>
