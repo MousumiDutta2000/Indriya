@@ -10,9 +10,9 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <style>
     body {
-      height: 100vh;
+      height: 130vh;
       background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);
-      background-size: 100%;
+      background-size: 150%;
     }
   </style>
 </head>
@@ -26,14 +26,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active px-2">
-          <a class="nav-link" href="/hos/registerpatient"><h3>Add a Patient or Doner</h3></a>
+          <a class="nav-link" href="/hos/registerpatient"><h3>Add a Patient or Donor</h3></a>
         </li>
         <li class="nav-item px-2">
           <a class="nav-link" href="/hos/match"><h3>Find a match</h3></a>
         </li>
         
         <li class="nav-item px-2">
-          <a class="nav-link" href="/about"><h3>About</h3></a>
+          <a class="nav-link" href="/about" target="_blank"><h3>About</h3></a>
         </li>
       </form>
     </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-2">
       <label for="name" class="form-label">ID</label>
-      <label for="caption" style="color: red;font-size: 10px;">*(should not contain any special charecters(!,-*))</label>
+      <label for="caption" style="color: red;font-size: 10px;">*(No special Character)</label>
       <input type="text" class="form-control" name="PID"  pattern="[A-Z a-z 0-9]*$" required>
     </div>
     </div>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-6">
       <label for="inputAddress2" class="form-label">Address</label>
-      <input type="text" class="form-control" placeholder="Apartment, Street" name="address" required>
+      <input type="text" class="form-control" placeholder="Apartment, Street" name="address" minlength="6" required>
     </div>
     </div>
     <div class="row">
@@ -106,7 +106,7 @@
     <div class="row">
     <div class="col-md-2">
       <label for="name" class="form-label">Age</label>
-      <label for="caption" style="color: red;font-size: 10px;">*(must be 5-70 years)</label>
+      <label for="caption" style="color: red;font-size: 10px;">*(must be 1-99 years)</label>
       <input type="text" class="form-control" name="age" pattern=\b([1-9]|[1-9][0-9])\b required>
     </div>
     <div class="col-md-2">
@@ -120,7 +120,7 @@
 
     <div class="col-md-4">
       <label for="name" class="form-label">Medical History</label>
-      <input type="text" class="form-control" name="medhistory" required>
+      <input type="text" class="form-control" name="medhistory" minlength="5" required>
     </div>
     <br>
     <div class="col-12 text-center ">

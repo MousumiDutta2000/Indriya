@@ -148,7 +148,7 @@ app.post('/createpatient', async (req, res) => {
         await createPatient(JSON.stringify(req.body));
         res.render('patient_donor_added',{"type":req.body.docType})
     } catch (error) {
-        res.render('createuser_error')
+        res.send('<script> window.alert("This ID already exists");window.location.assign("/hos/registerpatient")</script>')
     }
 })
 // to get the list of patients or donors by admin
@@ -162,7 +162,7 @@ app.get('/admin/:type', async (req, res) => {
        }
       //  res.sendStatus(200)
     } catch (error) {
-        res.sendStatus(404);
+        res.render('bc');
     }
 })
 // renders the matched donor list
@@ -173,7 +173,7 @@ app.get('/findmatch/:organRequired/:bloodgroup/:gender/:PID',async (req,res)=>{
         data.Patient_ID=req.params.PID;
         res.render('matched_donor_list',{"data":data})
     }catch{
-        res.sendStatus(404)
+        res.render('bc');
     }
 })
 // used to get a single patient details
@@ -181,7 +181,7 @@ app.get('/patient/:PID',async (req,res)=>{
     try{
         res.json(JSON.parse(await readPatient(req.params.PID)))
     }catch{
-        res.sendStatus(404)
+        res.render('bc');
     }
 })
 // used to delete a patient
@@ -191,7 +191,7 @@ app.get('/patient/delete/:PID',async (req,res)=>{
         res.redirect('/admin/patient')
 
     } catch (error) {
-        res.sendStatus(400);
+        res.render('bc');;
     }
 })
 // used to delete a donor
@@ -201,7 +201,7 @@ app.get('/donor/delete/:PID',async (req,res)=>{
         res.redirect('/admin/donor')
 
     } catch (error) {
-        res.sendStatus(400);
+        res.render('bc');;
     }
 })
 // used to cross-update donor , patient information
@@ -213,7 +213,7 @@ app.get('/selectmatch/:donorpid/:receiverpid',async(req,res)=>{
         await selectMatch(args);
         res.render("matched_congo_page")
     } catch (error) {
-        res.sendStatus(400);
+        res.render('bc');
     }
 })
 // ================================================
@@ -245,3 +245,9 @@ async function selectMatch(args){
     await contract.submitTransaction('PrimaryContract:selectMatch',JSON.stringify(args));
     console.log('PrimaryContract:selectMatch-Transaction has been submitted');
 }
+
+// =================================== Temporary handling ============================================
+
+app.get('*',async(req,res)=>{
+    res.render('404page')
+})
