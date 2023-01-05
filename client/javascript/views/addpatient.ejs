@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en">
 
 <head>
@@ -16,59 +16,82 @@
     }
   </style>
 </head>
-
-<body class="container">
-  <h1>Add a Patient or Donor</h1>
+<header class="" style="padding-bottom: 20px; padding-top: 10px;">
+  <nav class="navbar navbar-expand-lg navbar navbar-light"  >
+    <a class="navbar-brand" href="/hos" style="padding-left: 25px;"><h2>Indriya</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active px-2">
+          <a class="nav-link" href="/hos/registerpatient"><h3>Add a Patient or Doner</h3></a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/hos/match"><h3>Find a match</h3></a>
+        </li>
+        
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/about"><h3>About</h3></a>
+        </li>
+      </form>
+    </div>
+  </nav>
+</header>
+<body class="container-fluid ">
+  <div style="min-height: 90%;"> 
+  <h1 style="padding-left: 5%;">Add a Patient or Donor</h1>
   <hr>
-  <form class="row g-3" action="/createpatient" method="post">
-
+  <form class="blockquote " action="/createpatient" method="post" style="padding-left: 5%;">
+<div class="row">
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Type</label>
-      <select class="form-select" name="docType">
+      <select class="form-select" name="docType" required>
         <option value="patient">Patient</option>
         <option value="donor">Donor</option>
       </select>
     </div>
     <div class="col-md-2">
       <label for="name" class="form-label">ID</label>
-      <input type="text" class="form-control" name="PID">
+      <label for="caption" style="color: red;font-size: 10px;">*(should not contain any special charecters(!,-*))</label>
+      <input type="text" class="form-control" name="PID"  pattern="[A-Z a-z 0-9]*$" required>
     </div>
-
+    </div>
+    <div class="row">
     <div class="col-md-4">
       <label for="name" class="form-label">First Name</label>
-      <input type="text" class="form-control" name="firstName">
-    </div>
-     <div class="col-md-4">
-      <label for="name" class="form-label">First Name</label>
-      <input type="text" class="form-control" name="firstName">
+      <input type="text" class="form-control" name="firstName" required>
     </div>
     <div class="col-md-4">
       <label for="name" class="form-label">Last Name</label>
-      <input type="text" class="form-control" name="lastName">
+      <input type="text" class="form-control" name="lastName" required>
     </div>
-    <div class="col-md-2">
-      <label for="name" class="form-label">Age</label>
-      <input type="text" class="form-control" name="age">
     </div>
+    <div class="row">
     <div class="col-md-2">
       <label for="name" class="form-label">Phone</label>
-      <input type="text" class="form-control" name="phoneNumber" max="10">
+      <label for="caption" style="color: red;font-size: 10px;">*(must be number(0-9))</label>
+      <input type="text" class="form-control" name="phoneNumber" pattern="^\d{10}$" required>
     </div>
-    <div class="col-12">
+    <div class="col-6">
       <label for="inputAddress2" class="form-label">Address</label>
-      <input type="text" class="form-control" placeholder="Apartment, Street" name="address">
+      <input type="text" class="form-control" placeholder="Apartment, Street" name="address" required>
     </div>
+    </div>
+    <div class="row">
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Organ Type</label>
-      <select class="form-select" name="organRequired">
+      <select class="form-select" name="organRequired" required>
         <option value="Heart">Heart</option>
         <option value="Kidney">Kidney</option>
         <option value="Liver">Liver</option>
+         <option value="Eyes">Eyes</option>
       </select>
     </div>
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Blood Group</label>
-      <select class="form-select" name="bloodgroup">
+      <select class="form-select" name="bloodgroup" required>
         <option value="A+">A+</option>
         <option value="B+">B+</option>
         <option value="O+">O+</option>
@@ -79,26 +102,75 @@
         <option value="AB-">AB-</option>
       </select>
     </div>
+    </div>
+    <div class="row">
+    <div class="col-md-2">
+      <label for="name" class="form-label">Age</label>
+      <label for="caption" style="color: red;font-size: 10px;">*(must be 5-70 years)</label>
+      <input type="text" class="form-control" name="age" pattern=\b([1-9]|[1-9][0-9])\b required>
+    </div>
     <div class="col-md-2">
       <label class="form-label" for="autoSizingSelect">Gender</label>
-      <select class="form-select" id="autoSizingSelect" name="gender">
+      <select class="form-select" id="autoSizingSelect" name="gender" required>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
       </select>
     </div>
-
+</div>
 
     <div class="col-md-4">
       <label for="name" class="form-label">Medical History</label>
-      <input type="text" class="form-control" name="medhistory">
+      <input type="text" class="form-control" name="medhistory" required>
     </div>
-
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+    <div class="col-12 text-center ">
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
   </form>
   <hr>
-  <a href="/hos">Back</a>
+  <a href="/hos" class="blockquote">Back</a>
+</div>
 </body>
+<br><br>
+<footer class="text-center fs-5 bg-white text-muted">
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fs-4">
+            <i class="fas fa-gem me-3 text-secondary"></i>Indriya
+          </h6>
+          <p>
+            "Connecting people to Save life"<br> We connect the organ doners and patients. In order to save lives and making a helpful ecosystem.
+          </p>
+        </div>
+
+        
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          
+          <h6 class="text-uppercase fs-4">Contact</h6>
+          <p><i class="fas fa-home me-3 text-secondary"></i> Adamas University,Kolkata</p>
+          <p>
+            <i class="fas fa-envelope me-3 text-secondary"></i>
+            xyz@abc.com
+          </p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> +91 1234567890</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i> +91 1234567890</p>
+        </div>
+
+      </div>
+     
+    </div>
+  </section>
+  
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2022-23 Copyright:<br>
+    <a class="text-reset fw-bold"> Satyajit Ghosh <br> Mousumi Dutta <br> Aditya Jaman <br> Parichoy Nandi</a>
+  </div>
+
+</footer>
 
 </html>

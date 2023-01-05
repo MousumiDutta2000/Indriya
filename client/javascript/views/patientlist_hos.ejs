@@ -18,21 +18,47 @@
     </style>
 </head>
 
-<body class="container">
-    <h2>Patient Information</h2>
-    <table class="table">
+<header class="" style="padding-bottom: 20px; padding-top: 10px;">
+  <nav class="navbar navbar-expand-lg navbar navbar-light"  >
+    <a class="navbar-brand" href="/hos" style="padding-left: 25px;"><h2>Indriya</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active px-2">
+          <a class="nav-link" href="/hos/registerpatient"><h3>Add a Patient or Donor</h3></a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/hos/match"><h3>Find a match</h3></a>
+        </li>
+        
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/about"><h3>About</h3></a>
+        </li>
+      </form>
+    </div>
+  </nav>
+</header>
+<body class="container-fluid">
+    <h2 style="padding-left: 5%;">Patient Information</h2>
+    <br>
+    <div style="min-height: 90%;">
+    <table class="table" style="padding-left: 5%;">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Organ Type</th>
-                <th scope="col">Blood Group</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Match</th>
+                <th scope="col" class="blockquote">ID</th>
+                <th scope="col" class="blockquote">First Name</th>
+                <th scope="col" class="blockquote">Last Name</th>
+                <th scope="col" class="blockquote">Organ Type</th>
+                <th scope="col" class="blockquote">Blood Group</th>
+                <th scope="col" class="blockquote">Gender</th>
+                <th scope="col" class="blockquote">Match</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        
+        <tbody class="table-group-divider blockquote" >
             <% for(var i=0; i < data.length; i++) { %>
                 <tr>
                     <td scope="row">
@@ -64,11 +90,52 @@
                 </tr>
                 <% } %>
         </tbody>
+     
     </table>
-    <a href="/hos">Back</a>
+  </div>
+    <a href="/hos" class="blockquote">Back</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
 </body>
+<footer class="text-center fs-5 bg-white text-muted">
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fs-4">
+            <i class="fas fa-gem me-3 text-secondary"></i>Indriya
+          </h6>
+          <p>
+            "Connecting people to Save life"<br> We connect the organ doners and patients. In order to save lives and making a helpful ecosystem.
+          </p>
+        </div>
 
+        
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          
+          <h6 class="text-uppercase fs-4">Contact</h6>
+          <p><i class="fas fa-home me-3 text-secondary"></i> Adamas University,Kolkata</p>
+          <p>
+            <i class="fas fa-envelope me-3 text-secondary"></i>
+            xyz@abc.com
+          </p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> +91 1234567890</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i> +91 1234567890</p>
+        </div>
+
+      </div>
+     
+    </div>
+  </section>
+  
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2022-23 Copyright:<br>
+    <a class="text-reset fw-bold"> Satyajit Ghosh <br> Mousumi Dutta <br> Aditya Jaman <br> Parichoy Nandi</a>
+  </div>
+
+</footer>
 </html>

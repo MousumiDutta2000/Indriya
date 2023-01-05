@@ -114,6 +114,11 @@ app.get('/admin', function (request, response) {
     }
     response.end();
 });
+//aboutpage 
+app.get('/about',
+function(request,response){
+    response.render('about')
+});
 // hospital dashboard
 app.get('/hos', function (request, response) {
     // If the user is loggedin

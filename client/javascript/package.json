@@ -10,7 +10,7 @@
         "lint": "eslint .",
         "pretest": "npm run lint",
         "test": "nyc mocha --recursive",
-        "start":"node invoke.js"
+        "start": "node invoke.js"
     },
     "engineStrict": true,
     "author": "Hyperledger",

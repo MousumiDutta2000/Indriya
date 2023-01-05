@@ -91,6 +91,11 @@ app.get('/logout',function(req,res){
     req.session.loggedin=false;
     res.redirect('/');
 })
+//aboutpage 
+app.get('/about',
+function(request,response){
+    response.render('about')
+});
 // admin dashboard
 app.get('/admin', function(request, response) {
 	// If the user is loggedin
