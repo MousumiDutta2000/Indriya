@@ -8,7 +8,18 @@
 
 Demo Video : https://youtu.be/0kyaSlfcbNA
 
-White Paper : <a href="https://github.com/MousumiDutta2000/Indriya/raw/main/Indriya-whitepaper.pdf">Download Here</a>
+White Paper : <a href="https://www.techrxiv.org/articles/preprint/Indriya_Building_a_Secure_and_Transparent_Organ_Donation_System_with_Hyperledger_Fabric/22225999">Download Here</a>
+
+```
+@article{Ghosh2023,
+author = "Satyajit Ghosh and Mousumi Dutta",
+title = "{Indriya: Building a Secure and Transparent Organ Donation System with Hyperledger Fabric}",
+year = "2023",
+month = "3",
+url = "https://www.techrxiv.org/articles/preprint/Indriya_Building_a_Secure_and_Transparent_Organ_Donation_System_with_Hyperledger_Fabric/22225999",
+doi = "10.36227/techrxiv.22225999.v1"
+}
+```
 <hr>
 
 Indriya is a distributed online system that automates the organ donation and transplantation process and
