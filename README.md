@@ -8,6 +8,7 @@
 
 Demo Video : https://youtu.be/0kyaSlfcbNA
 
+White Paper : <a href="https://github.com/MousumiDutta2000/Indriya/raw/main/Indriya-whitepaper.pdf">Download Here</a>
 <hr>
 
 Indriya is a distributed online system that automates the organ donation and transplantation process and
