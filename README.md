@@ -1,8 +1,14 @@
 # Indriya
 
-Indriya: Organ Donation and Transplantation System using Blockchain
+## Indriya: Organ Donation and Transplantation System using Blockchain
+
+<b> This project is a part of Software Engineering Lab Coursework and is not intended to be used for any medical purposes. This project is solely developed for academic purposes, and it does not hold any medical liability. The project team does not take any responsibility for any damage or loss resulting from the use of this project for medical purposes.</b>
+
+<hr>
 
 Demo Video : https://youtu.be/0kyaSlfcbNA
+
+<hr>
 
 Indriya is a distributed online system that automates the organ donation and transplantation process and
 increases speed, transparency, and security. It provides various interfaces for different stakeholders like
@@ -167,7 +173,7 @@ sudo node invokeprod.js
         </td>
         <td align="center">
             <a href="https://www.linkedin.com/in/mousumi-dutta-b4199a217/">
-                <img src="https://media-exp1.licdn.com/dms/image/C4D03AQG7Vtmr-Q7DtQ/profile-displayphoto-shrink_800_800/0/1626774583190?e=1675296000&v=beta&t=61uwE7nT9M6U3FYL8g2v6q43Sffv3lI_8pIdNU0LHy0" width="120px;" alt=""/>
+                <img src="https://i.postimg.cc/dJf525qf/97080528.jpg" width="120px;" alt=""/>
                 <p><b>Mousumi Dutta</b></p><br />
             </a>
         </td>
